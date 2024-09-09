@@ -1,0 +1,437 @@
+<div id="cesiumContainer"></div>
+<!-- <button type="button" (click)="openLayerDetailDialog()">GET CCTV</button>
+
+<kendo-dialog class="custom-dialog handler-dialog" title="Layer Details" *ngIf="layerDetailDialog" [height]="700" [minWidth]="250" [width]="1024" (close)="closeLayerDetailDialog()">
+
+<form [formGroup]="reactiveForm">
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" id="name" name="name" formControlName="layer_name" placeholder="Your name" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="this.reactiveForm.controls.layer_name.invalid && (this.reactiveForm.controls.layer_name.dirty || this.reactiveForm.controls.layer_name.touched)">
+      <div *ngIf="this.reactiveForm.controls.layer_name.invalid && (this.reactiveForm.controls.layer_name.dirty || this.reactiveForm.controls.layer_name.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.layer_name.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.layer_name.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.layer_name.errors?.['maxlength']">
+          This field must have at most 250 characters.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Table Name:</label>
+      <input class="form-control" formControlName="table_name" type="text" value="" required placeholder="Enter Table Name" [class.is-invalid]="this.reactiveForm.controls.table_name.invalid && (this.reactiveForm.controls.table_name.dirty || this.reactiveForm.controls.table_name.touched)">
+      <div *ngIf="this.reactiveForm.controls.table_name.invalid && (this.reactiveForm.controls.table_name.dirty || this.reactiveForm.controls.table_name.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.table_name.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.table_name.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.table_name.errors?.['maxlength']">
+          This field must have at most 250 characters.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Layer Id:</label>
+      <input class="form-control" formControlName="layer_id" type="text" value="" required placeholder="Enter Layer Id" [class.is-invalid]="this.reactiveForm.controls.layer_id.invalid && (this.reactiveForm.controls.layer_id.dirty || this.reactiveForm.controls.layer_id.touched)">
+      <div *ngIf="this.reactiveForm.controls.layer_id.invalid && (this.reactiveForm.controls.layer_id.dirty || this.reactiveForm.controls.layer_id.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.layer_id.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.layer_id.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.layer_id.errors?.['maxlength']">
+          This field must have at most 250 characters.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Layer Type:</label>
+      <select class="form-control" formControlName="layer_type" required [class.is-invalid]="this.reactiveForm.controls.layer_type.invalid && (this.reactiveForm.controls.layer_type.dirty || this.reactiveForm.controls.layer_type.touched)">
+        <option value="">Select</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>      
+      <div *ngIf="this.reactiveForm.controls.layer_type.invalid && (this.reactiveForm.controls.layer_type.dirty || this.reactiveForm.controls.layer_type.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.layer_type.errors?.['required']">
+          This field is required.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Parent Layer Type:</label>
+      <select class="form-control" formControlName="parent_layer" required [class.is-invalid]="this.reactiveForm.controls.parent_layer.invalid && (this.reactiveForm.controls.parent_layer.dirty || this.reactiveForm.controls.parent_layer.touched)">
+        <option value="">Select</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>      
+      <div *ngIf="this.reactiveForm.controls.parent_layer.invalid && (this.reactiveForm.controls.parent_layer.dirty || this.reactiveForm.controls.parent_layer.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.parent_layer.errors?.['required']">
+          This field is required.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Service Url:</label>
+      <input class="form-control" formControlName="service_url" type="text" value="" required placeholder="Enter Layer Id" [class.is-invalid]="this.reactiveForm.controls.service_url.invalid && (this.reactiveForm.controls.service_url.dirty || this.reactiveForm.controls.service_url.touched)">
+      <div *ngIf="this.reactiveForm.controls.service_url.invalid && (this.reactiveForm.controls.service_url.dirty || this.reactiveForm.controls.service_url.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.service_url.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.service_url.errors?.['minlength']">
+          This field must have at least 1 character.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.service_url.errors?.['maxlength']">
+          This field must have at most 250 characters.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Geometry Type:</label>
+      <select class="form-control" formControlName="geometry_type" required [class.is-invalid]="this.reactiveForm.controls.geometry_type.invalid && (this.reactiveForm.controls.geometry_type.dirty || this.reactiveForm.controls.geometry_type.touched)">
+        <option value="">Select</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>      
+      <div *ngIf="this.reactiveForm.controls.geometry_type.invalid && (this.reactiveForm.controls.geometry_type.dirty || this.reactiveForm.controls.geometry_type.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.geometry_type.errors?.['required']">
+          This field is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Scale Start:</label>
+      <input pattern="[0-9]*" class="form-control" formControlName="scale_start" type="text" value="" required placeholder="Enter Layer Id" [class.is-invalid]="this.reactiveForm.controls.scale_start.invalid && (this.reactiveForm.controls.scale_start.dirty || this.reactiveForm.controls.scale_start.touched)">
+      <div *ngIf="this.reactiveForm.controls.scale_start.invalid && (this.reactiveForm.controls.scale_start.dirty || this.reactiveForm.controls.scale_start.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.scale_start.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.scale_start.errors?.['pattern']">
+          This field must be a number.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Scale End:</label>
+      <input pattern="[0-9]*" class="form-control" formControlName="scale_end" type="text" value="" required placeholder="Enter Layer Id" [class.is-invalid]="this.reactiveForm.controls.scale_end.invalid && (this.reactiveForm.controls.scale_end.dirty || this.reactiveForm.controls.scale_end.touched)">
+      <div *ngIf="this.reactiveForm.controls.scale_end.invalid && (this.reactiveForm.controls.scale_end.dirty || this.reactiveForm.controls.scale_end.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.scale_end.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.scale_end.errors?.['pattern']">
+          This field must be a number.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mb-2">        
+      <label class="form-check-label">
+        Status:
+      </label>    
+      <input class="form-check-input" formControlName="status" type="checkbox" id="status">
+    </div>
+
+    <div class="col mb-2">        
+      <label class="form-check-label">
+        WMS:
+      </label>    
+      <input class="form-check-input" formControlName="wms" type="checkbox"  id="wms">
+    </div>
+
+    <div class="col mb-2">        
+      <label class="form-check-label">
+        Info Click:
+      </label>    
+      <input class="form-check-input" formControlName="info_click" type="checkbox" id="info_click">
+    </div>
+
+    <div class="col mb-2">        
+      <label class="form-check-label">
+        First Time Load:
+      </label>    
+      <input class="form-check-input" formControlName="first_time" type="checkbox" id="first_time">
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Z - Index:</label>
+      <input pattern="[0-9]*" class="form-control" formControlName="z_index" type="text" value="" required placeholder="Enter Layer Id" [class.is-invalid]="this.reactiveForm.controls.z_index.invalid && (this.reactiveForm.controls.z_index.dirty || this.reactiveForm.controls.z_index.touched)">
+      <div *ngIf="this.reactiveForm.controls.z_index.invalid && (this.reactiveForm.controls.z_index.dirty || this.reactiveForm.controls.z_index.touched)" class="invalid-feedback">
+        <div *ngIf="this.reactiveForm.controls.z_index.errors?.['required']">
+          This field is required.
+        </div>
+        <div *ngIf="this.reactiveForm.controls.z_index.errors?.['pattern']">
+          This field must be a number.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-2 d-grid">
+      <button type="button" class="btn btn-sm btn-primary" (click)="validate()">Submit</button>
+    </div>
+  </div>
+</form>
+
+</kendo-dialog>
+
+<kendo-dialog class="custom-dialog handler-dialog" title="Edit" *ngIf="editDialog" [minWidth]="250" [width]="1024"
+  (close)="closeEditDialog()">
+
+  <form [formGroup]="DataFormDetail">
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Asset Id:</label>
+      <input class="form-control" formControlName="cctv_asset_id" type="text" value="" placeholder="Enter Asset Id">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Location Name:</label>
+      <input class="form-control" formControlName="location_name" type="text" value="" placeholder="Enter Location">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Junction Type:</label>
+      <input class="form-control" formControlName="junction_type" type="text" value=""
+        placeholder="Enter Junction Type">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-2">
+      <label for="name" class="form-label">Police Sytation Name:</label>
+      <input class="form-control" formControlName="pstation_name" type="text" value=""
+        placeholder="Enter PoliceStation">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-2 d-grid">
+      <button class="btn btn-sm btn-primary" (click)="add_bim_data_to_db($event)" type="button">Submit</button>
+    </div>
+  </div>
+  </form>
+
+
+</kendo-dialog>
+
+<kendo-dialog class="custom-dialog handler-dialog" title="Edit" *ngIf="selectFeatureDialog" [minWidth]="250" [width]="1024" (close)="closeFeatureDialog()">
+  <h4>Select Feature</h4>
+</kendo-dialog>
+
+ <button type="button" (click)="openEditDialog()">OPEN</button>
+<button type="button" (click)="getBimData()">GET</button>
+<div class="SubCursorBar">
+  <div class="content">
+    <div class="DisabledContent" is-disabled="false">
+      <div class="CursorBarControl" is-disabled="false" is-selected="true" title="Pan">
+        <div class="icon">
+          <svg class="" width="42" height="42" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5652 6C14.9172 6 14.3913 6.51692 14.3913 7.15385V14.4615H13.6087V8.69231C13.6087 8.05538 13.0828 7.53846 12.4348 7.53846C11.7868 7.53846 11.2609 8.05538 11.2609 8.69231V14.4615V16.7692V19.6734C11.2609 19.6734 9.0069 18.2402 7.87211 17.7548C7.55594 17.6194 7.22575 17.5385 6.89079 17.5385C5.1401 17.5385 5 19.0769 5 19.0769L8.13043 21.3846L10.6357 24.3398C11.5279 25.3922 12.85 26 14.243 26H19.8696C21.5983 26 23 24.6223 23 22.9231V14.4615V11C23 10.3631 22.4741 9.84615 21.8261 9.84615C21.1781 9.84615 20.6522 10.3631 20.6522 11V14.4615H19.8696V8.69231C19.8696 8.05538 19.3437 7.53846 18.6957 7.53846C18.0477 7.53846 17.5217 8.05538 17.5217 8.69231V14.4615H16.7391V7.15385C16.7391 6.51692 16.2132 6 15.5652 6Z" fill="white"></path>
+          </svg>
+        </div>
+        <mat-button-toggle-group name="ingredients" aria-label="Ingredients">
+          <mat-button-toggle (click)="goto_location()" title="Pan"><i class="fas fa-map-marker-alt fa-2x"></i></mat-button-toggle>
+          <mat-button-toggle (click)="measurementType($event)" title="Measure polyline"><mat-icon>timeline</mat-icon></mat-button-toggle>
+          <mat-button-toggle title="Measure polygon" (click)="measurementType($event)"><i class="fas fa-draw-polygon fa-2x"></i></mat-button-toggle>
+            <mat-button-toggle title="info" (click)="featureInfo()"><mat-icon>info</mat-icon></mat-button-toggle>
+            <mat-button-toggle title="Take Screenshot" (click)="takeSS()"><i class="fas fa-camera-retro fa-2x"></i></mat-button-toggle>
+            <mat-button-toggle title="3d Data Info" (click)="infoOf3DData()" ><i class="fas fa-question-circle fa-2x"></i></mat-button-toggle>
+            <mat-button-toggle (click)="clearAllMeasurementData()" title="Erase"><i class="fas fa-eraser fa-2x"></i></mat-button-toggle>
+            <mat-button-toggle  [matMenuTriggerFor]="menu" title="Add"><i class="fas fa-plus fa-2x"></i></mat-button-toggle>
+            <mat-menu #menu="matMenu">
+              <form [formGroup]="bimDataForm">
+                <mat-form-field>                  
+                  <select formControlName="feature_name" #feature (click)="add_bim_data($event)" matNativeControl required>
+                    <option value="">Select</option>
+                    <option value="car">Car</option>
+                    <option value="street_light">Street Light</option>
+                    <option value="cctv">CCTV</option>
+                    <option value="smart_pole">Smart Pole</option>
+                  </select>
+                </mat-form-field>
+              </form>
+            </mat-menu>
+            <mat-button-toggle title="Download Image" ><i class="fas fa-camera fa-2x"></i></mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+  </div>
+</div>
+<table id="property_tbl" class="table table-striped" style="display: block;">
+  <thead>
+    <tr>
+      <th scope="col">Sr.no</th>
+      <th scope="col">Field</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (property of property_data; track property_data.value; let i = $index) {
+    <tr>
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ property.value }}</td>
+      <td>{{ property.field }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+<table id="property_tbl" class="table table-striped" style="display: block;">
+  <tbody>
+    @for (property of gridInfoKeys; track gridInfoKeys; let i = $index) {
+    <tr>
+      <th scope="row">{{ [gridInfoKeys [i] ] }}</th>
+      <td>{{ gridarr[property] }}</td>      
+    </tr>
+    }
+  </tbody>
+</table>
+
+<button type="button" class="cesium-button">
+  <label>
+    <input type="checkbox" id="per_selection" (click)="per_selection()">Per-feature selection </label>
+</button>
+<mat-form-field>
+  <mat-label>Favorite food</mat-label>
+  <mat-select>
+    @for (food of foods; track food) {
+    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<mat-slide-toggle (change)="changeBaseLayer()" id="slider" color="#76ee59"> 
+  {{galleryImg}} 
+</mat-slide-toggle>
+<button (click)="rotateEntity(modelEntity, -5);">Rotate Left</button>
+<button (click)="rotateEntity(modelEntity, 5);">Rotate Right</button>
+<button (click)="getFeature()">Done</button>
+<button (click)="UpdateFeature()">Update</button>
+<mat-form-field class="dd_state">
+  <mat-label>Select State Name</mat-label>
+  <mat-select (selectionChange)="get_layer_by_state_id($event)">
+
+    <ng-container *ngIf="dropDownData">
+      <mat-option [value]="data.state_id" *ngFor="let data of dropDownData.data"
+        [attr.state_id]="data.state_id">{{data.city}}</mat-option>
+    </ng-container>
+
+
+  </mat-select>
+</mat-form-field> 
+
+ <button type="button" (click)="togglePanel()">Layer</button>--> 
+
+<div class="row closed-panel" [@widthGrow]="state">
+  <div class="col-sm-12">
+
+    <div class="layer-popup resize-popup" id="layers">
+      <div class="layers" id="layersheader">
+        <div class="layer-title-main w-100 align-items-center">
+          <h3 class="layer-title me-auto">
+            <label id="total_layer_cnt" style="color: aliceblue;" data-translate="_layer_popup">Layer</label>
+          </h3>
+
+          <a class="layer-close side-layer-resize ms-2 me-2" href="javascript:void(0);">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+              id="Layer_1" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50" enable-background="new 0 0 50 50"
+              xml:space="preserve">
+              <g>
+                <g>
+
+                  <polyline fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="3.5"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="22.9256"
+                    points="    47.5,1.832 22.191,27.15 22.191,16.419   " />
+
+                  <line fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="3.5"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="22.9256" x1="22.191" y1="27.15"
+                    x2="32.919" y2="27.15" />
+                </g>
+
+                <polyline fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="3.5"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="22.9256"
+                  points="   44.878,18.451 44.878,48.168 2.5,48.168 2.5,5.802 31.722,5.802  " />
+              </g>
+            </svg>
+          </a>
+
+        </div>
+        <div class="layer-content" id="layer_master">
+          <div class="accordion" id="accordionExample">
+            <div *ngFor="let parentLayer of data">
+              <div class='accordion-item'>
+                <h2 class='accordion-header'>
+                  <button class='accordion-button collapsed' type='button'
+                    (click)="toggleCollapse(parentLayer.parent_layer_id)">
+                    {{ parentLayer.parent_layer_name }}
+                  </button>
+                </h2>
+                <div [id]="'panelsStayOpen-collapse' + parentLayer.parent_layer_id" class='accordion-collapse collapse'>
+                  <div class='accordion-body'>
+                    <div *ngFor="let childLayer of parentLayer.child_layer">
+
+                      <div class="form-check">
+                        <input class="form-check-input" name="child_layer_name" (change)="showHideData($event)"
+                          [attr.mobile_service_url]="childLayer.mobile_service_url"
+                          [attr.parent_layer]="childLayer.parent_layer" [attr.defination]="childLayer.defination"
+                          [attr.layer_name]="childLayer.layer_name"
+                          [attr.combined_service]="childLayer.is_combined_service"
+                          [attr.service-url]="childLayer.service_url" [attr._id]="childLayer.geometry_type"
+                          data-id="Image" type="checkbox" 
+                          [attr.value]="childLayer.layer_id"
+                          [attr.Id]="'flexCheckDefault' + childLayer.layer_id"
+                          [attr.layer_name]="childLayer.layer_name">
+                        <label class="form-check-label">{{ childLayer.layer_name }}</label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+

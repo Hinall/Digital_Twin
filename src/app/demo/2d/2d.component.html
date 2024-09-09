@@ -1,0 +1,121 @@
+
+
+<!-- <div appCesium></div> -->
+<div style="display:flex; justify-content:left; padding-bottom:8px; width: 40%;">
+  
+  <kendo-dropdownlist rounded="full"
+  defaultItem="Select item..."
+  [data]="listItems"
+  [(ngModel)]="selectedTableName" 
+ 
+>"select"</kendo-dropdownlist>
+<kendo-autocomplete
+  #autocomplete
+  [data]="searchResultNames"
+  (filterChange)="handleFilter($event)"
+  [filterable]="true"
+ 
+  (valueChange)="onValueChange($event)"
+  [(ngModel)]="selectedOption"
+ 
+></kendo-autocomplete>
+</div>
+<div id="map"></div>
+
+<!-- <div class="SubCursorBar">
+  <div class="content">
+    <div class="DisabledContent" is-disabled="false">
+      <div class="CursorBarControl" is-disabled="false" is-selected="true" title="Pan">
+        
+        <mat-button-toggle-group name="ingredients" aria-label="Ingredients">
+          <mat-button-toggle (click)="gotoFtn()"  title="Go-To"><i class="fas fa-map-marker-alt fa-2x"></i></mat-button-toggle>
+          <mat-button-toggle (click)="addLineStringMeasurement()"  title="LineString"><mat-icon>timeline</mat-icon></mat-button-toggle>
+          <mat-button-toggle (click)="addPolygonMeasurement()" title="Polygon" ><i class="fas fa-draw-polygon fa-2x"></i></mat-button-toggle>
+            <mat-button-toggle (click)="featureInfo()" title="Info"><mat-icon>info</mat-icon></mat-button-toggle>
+            <mat-button-toggle title="Take Screenshot" (click)="takeSS()"><i class="fas fa-camera-retro fa-2x"></i></mat-button-toggle>
+            <mat-button-toggle (click)="clearDrawnFeature()" title="Erase"><i class="fas fa-eraser fa-2x"></i></mat-button-toggle>
+       
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    </div>
+</div> -->
+
+<!-- <button type="button" (click)="togglePanel()" style="position: absolute; left: 30px; top: 50px;">Layer</button> -->
+<div class="row" [@widthGrow]="state">
+  <div class="col-sm-12">
+
+    <div class="layer-popup resize-popup" style="top: 300px;" id="layers" >
+      <div class="layers" id="layersheader">
+        <div class="layer-title-main w-100 align-items-center">
+          <h3 class="layer-title me-auto">
+            <label id="total_layer_cnt" style="color: aliceblue;" data-translate="_layer_popup">Layer</label>
+          </h3> 
+
+          <a class="layer-close side-layer-resize ms-2 me-2" href="javascript:void(0);">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+              id="Layer_1" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50" enable-background="new 0 0 50 50"
+              xml:space="preserve">
+              <g>
+                <g>
+
+                  <polyline fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="3.5"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="22.9256"
+                    points="    47.5,1.832 22.191,27.15 22.191,16.419   " />
+
+                  <line fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="3.5"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="22.9256" x1="22.191" y1="27.15"
+                    x2="32.919" y2="27.15" />
+                </g>
+
+                <polyline fill-rule="evenodd" clip-rule="evenodd" fill="none" stroke="#FFFFFF" stroke-width="3.5"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="22.9256"
+                  points="   44.878,18.451 44.878,48.168 2.5,48.168 2.5,5.802 31.722,5.802  " />
+              </g>
+            </svg>
+          </a>
+
+        </div>
+        <div class="layer-content" id="layer_master">
+          <div class="accordion" id="accordionExample">
+            <div *ngFor="let parentLayer of data.data">
+              <div class='accordion-item'>
+                <h2 class='accordion-header'>
+                  <button class='accordion-button collapsed' type='button'
+                    (click)="toggleCollapse(parentLayer.parent_layer_id)">
+                    {{ parentLayer.parent_layer_name }}
+                  </button>
+                </h2>
+                <div [id]="'panelsStayOpen-collapse' + parentLayer.parent_layer_id" class='accordion-collapse collapse'>
+                  <div class='accordion-body'>
+                    <div *ngFor="let childLayer of parentLayer.child_layer">
+                      <div class="form-check">
+                        <input class="form-check-input" name="child_layer_name" (change)="showHideData($event)"
+                        [attr.layer_id]="childLayer.layer_id"
+                          [attr.mobile_service_url]="childLayer.mobile_service_url"
+                          [attr.parent_layer]="childLayer.parent_layer" [attr.defination]="childLayer.defination"
+                          [attr.layer_name]="childLayer.layer_name"
+                          [attr.combined_service]="childLayer.is_combined_service"
+                          [attr.service-url]="childLayer.service_url" [attr.dataid]="childLayer.geometry_type"
+                          data-id="Image" type="checkbox" [attr.value]="childLayer.layer_id"
+                          [attr.Id]="'flexCheckDefault' + childLayer.layer_id"
+                          [attr.layer_name]="childLayer.layer_name">
+                        <label class="form-check-label">{{ childLayer.layer_name }}</label>
+                      </div>
+                    </div>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
